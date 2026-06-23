@@ -14,20 +14,20 @@ Abaixo está a representação visual da esteira de dados configurada no Apache 
 ## Principais Características
 Em vez de depender de armazenamento local massivo, este projeto implementa uma abordagem altamente eficiente de extração:
 1. **Extração Remota (VFS):** Utiliza o Sistema de Arquivos Virtual do Apache Hop (`zip:https://...`) para ler os arquivos `.CSV` diretamente de dentro dos arquivos `.zip` hospedados nos servidores do governo, economizando largura de banda e espaço em disco.
-2. **Filtro de Localidade (Regex):** Configurado especificamente com a expressão regular `.*TIMOTEO.*\.CSV` para isolar cirurgicamente os dados da estação meteorológica de Timóteo - MG.[cite: 1]
-3. **Tratamento de Cabeçalhos:** A pipeline pula automaticamente as primeiras 8 linhas de metadados do INMET antes de iniciar a leitura do dataset.[cite: 1]
-4. **Conversão de Tipos Dinâmica (Type Casting):** Para evitar quebras causadas por dados ausentes ou textuais em colunas numéricas, todos os dados são ingeridos inicialmente como `String` e convertidos explicitamente para `Number` imediatamente antes da agregação.[cite: 1]
+2. **Filtro de Localidade (Regex):** Configurado especificamente com a expressão regular `.*TIMOTEO.*\.CSV` para isolar cirurgicamente os dados da estação meteorológica de Timóteo - MG.
+3. **Tratamento de Cabeçalhos:** A pipeline pula automaticamente as primeiras 8 linhas de metadados do INMET antes de iniciar a leitura do dataset.
+4. **Conversão de Tipos Dinâmica (Type Casting):** Para evitar quebras causadas por dados ausentes ou textuais em colunas numéricas, todos os dados são ingeridos inicialmente como `String` e convertidos explicitamente para `Number` imediatamente antes da agregação.
 
 ## 🛠️ Tecnologias Utilizadas
-* **Apache Hop:** Orquestração de dados e desenvolvimento da pipeline ETL.[cite: 1]
-* **VFS (Virtual File System):** Extração remota de arquivos ZIP.[cite: 1]
-* **Regex (Expressões Regulares):** Direcionamento dinâmico do arquivo da cidade-alvo.[cite: 1]
+* **Apache Hop:** Orquestração de dados e desenvolvimento da pipeline ETL.
+* **VFS (Virtual File System):** Extração remota de arquivos ZIP.
+* **Regex (Expressões Regulares):** Direcionamento dinâmico do arquivo da cidade-alvo.
 
 ## Fluxo de Execução (`.hpl`)
-`Get file names (VFS)` ➔ `Text file input (Pular cabeçalho)` ➔ `Select values (Limpar metadados do sistema)` ➔ `Strings cut (Extrair Ano)` ➔ `Select values (Converter String para Number)` ➔ `Sort rows` ➔ `Group by (Soma da Precipitação Anual)`[cite: 1]
+`Get file names (VFS)` ➔ `Text file input (Pular cabeçalho)` ➔ `Select values (Limpar metadados do sistema)` ➔ `Strings cut (Extrair Ano)` ➔ `Select values (Converter String para Number)` ➔ `Sort rows` ➔ `Group by (Soma da Precipitação Anual)`
 
 ## Resultados Finais
-Após o processamento completo dos dados de 2023 e 2024, a soma acumulada da precipitação horária gerou o seguinte resultado consolidado:[cite: 1]
+Após o processamento completo dos dados de 2023 e 2024, a soma acumulada da precipitação horária gerou o seguinte resultado consolidado:
 
 <img width="761" height="565" alt="image" src="https://github.com/user-attachments/assets/452d4a7a-78fe-4736-9a98-c8d176425e70" />
 

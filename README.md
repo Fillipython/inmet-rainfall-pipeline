@@ -26,6 +26,12 @@ Em vez de depender de armazenamento local massivo, este projeto implementa uma a
 ## Fluxo de Execução (`.hpl`)
 `Get file names (VFS)` ➔ `Text file input (Pular cabeçalho)` ➔ `Select values (Limpar metadados do sistema)` ➔ `Strings cut (Extrair Ano)` ➔ `Select values (Converter String para Number)` ➔ `Sort rows` ➔ `Group by (Soma da Precipitação Anual)`
 
+## Orquestração do Workflow (`.hwf`)
+Para gerenciar e automatizar a esteira de dados de forma profissional, o projeto inclui um **Workflow** orquestrador (`workflow_chuva_inmet.hwf`). Ele controla o ciclo de vida da execução, disparando os processos a partir de um ponto inicial seguro e validando a conclusão com sucesso.
+
+### Fluxo do Orquestrador
+`Start` ➔ `pipeline_chuva_inmet.hpl` ➔ `Success`
+
 ## Resultados Finais
 Após o processamento completo dos dados de 2023 e 2024, a soma acumulada da precipitação horária gerou o seguinte resultado consolidado:
 
